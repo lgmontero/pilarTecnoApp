@@ -34,37 +34,68 @@ export default class Home extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <ImageBackground
           style={{ height }}
-          source={require('../assets/images/fondo.png')}
+          source={require('../assets/images/pilarte.png')}
         >
           <View style={{ flexDirection: 'column', height, justifyContent: 'center' }}>
             <View style={{ flexDirection: 'row' }}>
+
               <TouchableOpacity
                 onPress={() => this._onHomePress()}
-                style={[styles.button, { backgroundColor: 'rgba(60, 179, 113, 0.5)' }]}
+
               >
-                <Text style={styles.text}>
-                  Principal
-                </Text>
+                <ImageBackground
+                  style={[styles.button, { backgroundColor: 'rgba(60, 179, 113, 0.95)' }]}
+                  imageStyle={{ borderRadius: 20 }}
+                  source={require('../assets/images/btnprinc.png')}
+                >
+                  <Text style={styles.text}>
+                    Principal
+                  </Text>
+                </ImageBackground>
               </TouchableOpacity>
 
-              <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(238, 0, 238, 0.5)' }]}>
-                <Text style={styles.text}>
-                  Perfil
-                </Text>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Profile")}
+              >
+                <ImageBackground
+                  style={[styles.button, { backgroundColor: 'rgba(238, 0, 238, 0.95)' }]}
+                  imageStyle={{ borderRadius: 20 }}
+                  source={require('../assets/images/btnperf.png')}
+                >
+
+                  <Text style={styles.text}>
+                    Perfil
+                  </Text>
+                </ImageBackground>
               </TouchableOpacity>
             </View>
 
             <View style={{ flexDirection: 'row', }}>
-              <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(255, 165, 0, 0.5)' }]}>
-                <Text style={styles.text}>
-                  Posteos
-                </Text>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Posts")}
+              >
+                <ImageBackground style={[styles.button, { backgroundColor: 'rgba(255, 165, 0, 0.95)' }]}
+                  imageStyle={{ borderRadius: 20 }}
+                  source={require('../assets/images/btnpost.png')}
+                >
+                  <Text style={styles.text}>
+                    Posteos
+                  </Text>
+                </ImageBackground>
               </TouchableOpacity>
 
-              <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(0, 165, 188, 0.8)' }]}>
-                <Text style={styles.text}>
-                  Mapa
-                </Text>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Map")}
+              >
+                <ImageBackground style={[styles.button, { backgroundColor: 'rgba(0, 165, 188, 0.95)' }]}
+                  imageStyle={{ borderRadius: 20 }}
+                  source={require('../assets/images/btnmap.png')}
+
+                >
+                  <Text style={styles.text}>
+                    Mapa
+                  </Text>
+                </ImageBackground>
               </TouchableOpacity>
             </View>
           </View>
@@ -79,16 +110,18 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center'
+    color: '#ffff',
+    textAlign: 'center',
+    textShadowColor: '#0000',
   },
   button: {
     margin: width / 20,
-    height: width / 2.5,
+    height: width / 4.2,
     width: width / 2.5,
-    borderRadius: 15,
+    marginVertical : width/ 50,
+    
+    borderRadius: 25,
     justifyContent: 'center',
-    backgroundColor: '#fff',
     zIndex: 1
   }
 })

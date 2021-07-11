@@ -8,38 +8,74 @@ import { Icon } from 'react-native-elements';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export const Tabs = () => {
+export const Tabs = (props) => {
     return (
         <Tab.Navigator
-            tabBarOptions={{
-                activeTintColor: '#f5c511',//'rgb(41,34,97)',
-                inactiveTintColor: 'red',
-                labelStyle: {
+            tabBarOptions = {{
+                activeTintColor : '#46f511',
+                inactiveTintColor : 'red',
+                labelStyle : 
+                {
                     fontSize: 16,
                     marginBottom: 3,
                     fontWeight: "bold"
                 },
-                adaptive: true
+
+                adaptive: false
             }}
         >
-            <Tab.Screen name="Home" component={HomeStackScreen}
+            <Tab.Screen
+                name="Home"
+                component={HomeStackScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <Icon name={'home'} type="font-awesome-5" size={20} color={color} />),
-                }} />
-            <Tab.Screen name="Profile" component={ProfileStackScreen}
+                        <Icon
+                            name={'home'}
+                            type="font-awesome-5"
+                            size={20}
+                            color={color}
+                        />),
+                }}
+            />
+            <Tab.Screen
+                name="Profile"
+                component={ProfileStackScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <Iconn ame={'user'} type="font-awesome-5" size={20} color={color} />),
-                }} />
-            <Tab.Screen name="Posts" component={PostsStackScreen}
+                        <Icon
+                            name={'user'}
+                            type="font-awesome-5"
+                            size={20}
+                            color={color}
+                        />),
+                }}
+            />
+            <Tab.Screen
+                name="Posts"
+                component={PostsStackScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <Icon name={'marker'} type="font-awesome-5" size={20} color={color} />),
-                }} />
-            <Tab.Screen name="Map" component={MapStackScreen} options={{
-                tabBarIcon: ({ color }) => (
-                    <Icon name={'map'} type="font-awesome-5" size={20} color={color} />),
-            }} />
-        </Tab.Navigator>);
+                        <Icon
+                            name={'marker'}
+                            type="font-awesome-5"
+                            size={20}
+                            color={color}
+                        />),
+                }}
+            />
+            <Tab.Screen
+                name="Map"
+                component={MapStackScreen}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <Icon
+                            name={'map'}
+                            type="font-awesome-5"
+                            size={20}
+                            color={color}
+                        />),
+                }}
+            />
+        </Tab.Navigator>
+    );
 }

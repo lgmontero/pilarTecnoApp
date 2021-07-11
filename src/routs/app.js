@@ -6,16 +6,19 @@ import Login from '../screens/Login';
 const Stack = createStackNavigator();
 
 export default AppStack = (props) => {
-    
-    const isloged = true;
+
+    let isloged = true
+
     return (
-        <Stack.Navigator headerMode="none" > {
-            isloged ? (
-                <Stack.Screen name="AppStack" component={Tabs} />
-            ) : (
-                <Stack.Screen name="LogIn" component={Login} />
-            )
-        }
+        <Stack.Navigator headerMode="none" >
+            {
+            isloged ? 
+            (<Stack.Screen name="AppStack" component={Tabs} />) 
+            :
+             (<Stack.Screen name="LogIn" component={Login}/>)
+            }
+            
+            
         </Stack.Navigator >
     )
 }
