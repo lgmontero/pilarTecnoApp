@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   Dimensions,
-  StatusBar,
   StyleSheet,
   Text,
   ImageBackground,
-  TouchableOpacity,
   View,
-  Alert
 } from 'react-native';
 
 const height = Dimensions.get('window').height
@@ -17,79 +13,43 @@ const width = Dimensions.get('window').width
 
 
 export default class PostEdit extends React.Component {
-
-  _onHomePress = () => {
-    Alert.alert(
-      "Hola",
-      
-      "Ya te encuentras ahí",
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ]
-    );
-  }
-
-
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <ImageBackground
           style={{ height }}
-          source={require('../assets/images/worktree.png')}
+          source={require('../assets/images/patron2.jpg')}
         >
-          <View style={{ flexDirection: 'column', height, justifyContent: 'center' }}>
-            <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity
-                onPress={() => this._onHomePress()}
-                style={[styles.button, { backgroundColor: 'rgba(60, 179, 113, 0.5)' }]}
-              >
+          
+            <View style={styles.base}>              
+            <ImageBackground
+              style={styles.base}
+              source={require('../assets/images/titulopost.png')}
+            >
                 <Text style={styles.text}>
-                  Principal
+                  Seccion PostEdit
                 </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(238, 0, 238, 0.5)' }]}>
-                <Text style={styles.text}>
-                  Perfil
-                </Text>
-              </TouchableOpacity>
+                </ImageBackground>
             </View>
-
-            <View style={{ flexDirection: 'row', }}>
-              <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(255, 165, 0, 0.5)' }]}>
-                <Text style={styles.text}>
-                  Posteos
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={[styles.button, { backgroundColor: 'rgba(0, 165, 188, 0.8)' }]}>
-                <Text style={styles.text}>
-                  Mapa
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          
 
         </ImageBackground>
       </SafeAreaView>
     )
   }
 }
-
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30,
+    fontSize: 22,
     fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center'
+    color: '#000',
+    textAlign: 'center',
+    margin: width / 10,
+    height: width / 8,
+    width: width / 1.2,
   },
-  button: {
-    margin: width / 20,
-    height: width / 2.5,
-    width: width / 2.5,
-    borderRadius: 15,
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    zIndex: 1
-  }
+  base:{
+    flexDirection: 'column-reverse',     
+  },
+
 })

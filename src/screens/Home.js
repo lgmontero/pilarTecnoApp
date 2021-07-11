@@ -34,7 +34,7 @@ export default class Home extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <ImageBackground
           style={{ height }}
-          source={require('../assets/images/pilarte.png')}
+          source={require('../assets/images/patron1.jpg')}
         >
           <View style={{ flexDirection: 'column', height, justifyContent: 'center' }}>
             <View style={{ flexDirection: 'row' }}>
@@ -46,7 +46,7 @@ export default class Home extends React.Component {
                 <ImageBackground
                   style={[styles.button, { backgroundColor: 'rgba(60, 179, 113, 0.95)' }]}
                   imageStyle={{ borderRadius: 20 }}
-                  source={require('../assets/images/btnprinc.png')}
+                  source={require('../assets/images/btn1.jpg')}
                 >
                   <Text style={styles.text}>
                     Principal
@@ -60,7 +60,7 @@ export default class Home extends React.Component {
                 <ImageBackground
                   style={[styles.button, { backgroundColor: 'rgba(238, 0, 238, 0.95)' }]}
                   imageStyle={{ borderRadius: 20 }}
-                  source={require('../assets/images/btnperf.png')}
+                  source={require('../assets/images/btn2.jpg')}
                 >
 
                   <Text style={styles.text}>
@@ -76,7 +76,7 @@ export default class Home extends React.Component {
               >
                 <ImageBackground style={[styles.button, { backgroundColor: 'rgba(255, 165, 0, 0.95)' }]}
                   imageStyle={{ borderRadius: 20 }}
-                  source={require('../assets/images/btnpost.png')}
+                  source={require('../assets/images/btn3.jpg')}
                 >
                   <Text style={styles.text}>
                     Posteos
@@ -89,7 +89,7 @@ export default class Home extends React.Component {
               >
                 <ImageBackground style={[styles.button, { backgroundColor: 'rgba(0, 165, 188, 0.95)' }]}
                   imageStyle={{ borderRadius: 20 }}
-                  source={require('../assets/images/btnmap.png')}
+                  source={require('../assets/images/btn4.jpg')}
 
                 >
                   <Text style={styles.text}>

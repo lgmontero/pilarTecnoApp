@@ -18,7 +18,7 @@ export default class Post extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <ImageBackground
           style={{ height }}
-          source={require('../assets/images/workone.png')}
+          source={require('../assets/images/patron2.jpg')}
         >
           
             <View style={styles.base}>              
@@ -41,13 +41,13 @@ export default class Post extends React.Component {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30,
+    fontSize: 29,
     fontWeight: 'bold',
-    color: '#000',
+    color: 'black',
     textAlign: 'center',
-    margin: width / 40,
+    margin: width / 10,
     height: width / 8,
-    width: width / 1.0,
+    width: width / 1.2,        
   },
   base:{
     flexDirection: 'column-reverse',     
