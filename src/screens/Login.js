@@ -13,10 +13,10 @@ import {
   TextInputComponent
 } from 'react-native';
 import { Input, Icon, Button } from 'react-native-elements';
-import auth from '@react-native-firebase/auth';
+import { auth } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { connect } from 'react-redux'
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import { connect } from 'react-redux';
 import { actions } from '../store';
 
 
@@ -24,7 +24,8 @@ const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 
 GoogleSignin.configure({
-  webClientId: '334428375673-8v27scqf49ol6udlfh7cmh6aamddg6vp.apps.googleusercontent.com',
+  webClientId:'334428375673-8v27scqf49ol6udlfh7cmh6aamddg6vp.apps.googleusercontent.com',
+
 });
 
 class Login extends React.Component {
@@ -32,37 +33,27 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     }
 
   }
-  singInWithGoogle = () => {
+  onGoogleButtonPress = async () => {
     // Get the users ID token
     const { idToken } = await GoogleSignin.signIn();
 
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-    console.log('Google Credential:' + JSON.Stirnggify (googleCredential))
+    console.log('Google Credential:' + JSON.Stirnggify(googleCredential));
 
     // Sign-in the user with the credential
     return auth().signInWithCredential(googleCredential);
   }
 
-
-  _onLoginPress = () => {
-    Alert.alert(
-      "Hola",
-      "Aun no puedes ingresar",
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ]
-    );
-  }
   render() {
 
     return (
- 
+
       <SafeAreaView style={{ flex: 1 }}>
         <ImageBackground
           source={require('../assets/images/patron7.jpg')}
@@ -92,7 +83,7 @@ class Login extends React.Component {
                   />
                 }
                 placeholder='username'
-                
+
               />
             </View>
             <View style={styles.base}>
@@ -108,22 +99,29 @@ class Login extends React.Component {
           </View>
 
           <TouchableOpacity style={[styles.buttonIn, { backgroundColor: 'rgba(27, 102, 135, 0.8)' }]}
-            // onPress={() => this._onLoginPress()}
-             onPress={()=>this.singInWithGoogle().then(async(data)=>{
-              console.log('Signed in with Google!')
-              if(data){
-              console.log('res login: '+JSON.stringify(data.user))
-              try {
-              await AsyncStorage.setItem('isloged', JSON.stringify(data.user))
-              } catch (e) {
-              console.log('hubo un error :'+e)
-              }
-              this.props.setUser(data.user)
-              }
-              })}
+            
           >
             <Text style={styles.textIn}>
               Ingresar
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonIn, { backgroundColor: 'rgba(27, 102, 135, 0.8)' }]}
+            onPress={() => this.onGoogleButtonPress().then(async (data) => {
+              console.log('Signed in with Google!');
+              if (data) {
+                console.log('res login: ' + JSON.stringify(data.user));
+                try {
+                  await AsyncStorage.setItem('isloged', JSON.stringify(data.user));
+                } catch (e) {
+                  console.log('Hubo un error :' + e);
+                }
+                this.props.setUser(data.user);
+              }
+            }).catch(err => { console.log(err) })
+            }
+          >
+            <Text style={styles.textIn}>
+              Google
             </Text>
           </TouchableOpacity>
 
@@ -206,5 +204,5 @@ const mapStateToProps = state => ({
   user: state.user.user
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)((Login))
+export default connect(mapStateToProps, mapDispatchToProps)((Login))
 

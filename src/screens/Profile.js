@@ -11,11 +11,11 @@ import {
   View,
   Alert
 } from 'react-native';
-import { connect } from 'react-redux'
-import { Avatar, Button } from 'react-native-elements'
+import { connect } from 'react-redux';
+import { Avatar, Button } from 'react-native-elements';
 import { actions } from '../store';
-import auth from '@react-native-firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { auth } from '@react-native-firebase/auth';
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
@@ -34,7 +34,7 @@ class Profile extends React.Component {
   }
   componentDidMount = () => {
     const { user } = this.props
-    console.log('user profile: ' + JSON.stringify(user))
+    console.log('user profile: ' + JSON.stringify(user));
     this.setState({
       email: user.providerData[0].email,
       photoURL: user.providerData[0].photoURL,
@@ -43,7 +43,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { email, photoURL, name } = this.state;
+    const { email, photoURL, name } = this.state
     return (
       <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={styles.content}>
