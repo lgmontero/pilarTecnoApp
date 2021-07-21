@@ -9,11 +9,14 @@ const Stack = createStackNavigator();
 export default AppStack = (props) => {
 
     const user = useSelector(state => state.user.user)
-
+    let isLoadingApp = false
     return (
         <Stack.Navigator headerMode="none" >
             {
-                user ? (
+                isLoadingApp?(
+                    <Stack.Screen name="LoadScreen" component={LoadScreen} />
+                ):
+                 user? (
                     <Stack.Screen name="AppStack" component={Tabs} />
                 ) : (
                     <Stack.Screen name="LogIn" component={Login} />

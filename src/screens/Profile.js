@@ -14,8 +14,9 @@ import {
 import { connect } from 'react-redux';
 import { Avatar, Button } from 'react-native-elements';
 import { actions } from '../store';
-import { auth } from '@react-native-firebase/auth';
+import auth  from '@react-native-firebase/auth';
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
+// import { Profile } from "react-native-fbsdk-next";
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
@@ -42,6 +43,7 @@ class Profile extends React.Component {
     })
   }
 
+
   render() {
     const { email, photoURL, name } = this.state
     return (
@@ -60,17 +62,18 @@ class Profile extends React.Component {
           </View>
         </View>
         <View style={{ flex: 1, top: 50, width: width * 0.5 }}>
-          <Button title='Salir' onPress={() => {
+          <Button title='Salir' 
+          onPress={() => {
             auth()
               .signOut()
-              .then(async () => {
-                console.log('User signed out!'),
-                  this.props.setUser({ user: null })
+              .then(async () => {                  
                 try {
-                  await AsyncStorage.delItem('isloged')
+                  await AsyncStorage.removeItem('isloged' , JSON.stringify(data.user));
+                  this.props.setUser({ user: null })
                 } catch (e) {
-                  console.log('hubo un error :' + e)
-                }
+                  console.log('Exite error :' + e)
+                
+              }
               })
           }} />
         </View>
@@ -78,6 +81,15 @@ class Profile extends React.Component {
     )
   }
 }
+const mapDispatchToProps = dispatch => ({
+  setUser: ({ user }) =>
+    dispatch(actions.user.setUser({ user })),
+})
+const mapStateToProps = state => ({
+  user: state.user.user
+})
+export default connect(mapStateToProps, mapDispatchToProps)((Profile))
+
 const styles = StyleSheet.create({
   text: {
     fontSize: 30,
@@ -92,7 +104,7 @@ const styles = StyleSheet.create({
     // alignItems:'center'
   },
   dataContainer: {
-    top: 50,
+    top: 10,
     width
   },
   infoText: {
@@ -101,11 +113,3 @@ const styles = StyleSheet.create({
     color: 'grey'
   }
 })
-const mapDispatchToProps = dispatch => ({
-  setUser: ({ user }) =>
-    dispatch(actions.user.setUser({ user })),
-})
-const mapStateToProps = state => ({
-  user: state.user.user
-})
-export default connect(mapStateToProps, mapDispatchToProps)((Profile))

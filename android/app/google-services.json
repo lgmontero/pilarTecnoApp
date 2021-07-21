@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "334428375673-ljbsbhbdtvvectlav407n0jf4glnt0ua.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lmontero.pilartecnoapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "334428375673-8v27scqf49ol6udlfh7cmh6aamddg6vp.apps.googleusercontent.com",
           "client_type": 3
         }

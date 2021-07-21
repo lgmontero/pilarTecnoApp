@@ -14,7 +14,7 @@ import AppStack from '../routs/app';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider, useDispatch } from 'react-redux';
 import { store, actions } from '../store';
-import auth from '@react-native-firebase/auth';
+import auth  from '@react-native-firebase/auth';
 // import AppStack from '../routs/app';
 
 
@@ -37,7 +37,8 @@ const App = (props) => {
     async function onAuthStateChanged(user) {
       if (user) {
         setUser(user)
-      } else {
+      } 
+      else {
         dispatch(actions.user.setUser(null))
       }
       if (initializing) setInitializing(false);
@@ -48,15 +49,16 @@ const App = (props) => {
       return subscriber; // unsubscribe on unmount
     }, []);
 
-    if (initializing) { return null; }
-   
+    if (initializing) return null;
+       
     return (
       <NavigationContainer ref={navigationRef}>
         <AppStack />
       </NavigationContainer>
     );
-
+    
   }
+  
   return (
     <Provider store={store}>
       <AppWrapped />
