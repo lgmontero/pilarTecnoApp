@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
   Alert,
-  TextInputComponent
+  TextInput
 } from 'react-native';
 import { Input, Icon, Button } from 'react-native-elements';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
@@ -40,7 +40,8 @@ class Login extends React.Component {
     
   }
 
-  login = async (email, password) => {
+  onFirebaseLogin = async (email, password) => {
+    
     try {
       await auth().signInWithEmailAndPassword(email, password);
     } catch (e) {
@@ -111,6 +112,10 @@ class Login extends React.Component {
 
   render() {
 
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+
     return (
 
       <SafeAreaView style={{ flex: 1 }}>
@@ -129,8 +134,15 @@ class Login extends React.Component {
           </View>
           <View>
             <View style={styles.base} >
-              <Input
-                style={styles.input}
+              <TextInput
+               style={styles.input}
+               Value={email}
+               onChangeText={(userEmail) => setEmail(userEmail)}
+               placeholderText="Email"
+               keyboardType="email-address"
+               autoCapitalize="none"
+               autoCorrect={false}
+                
                 leftIcon=
                 {
                   <Icon
@@ -238,6 +250,15 @@ class Login extends React.Component {
     )
   }
 }
+const mapDispatchToProps = dispatch => ({
+  setUser: (data) =>
+    dispatch(actions.user.setUser(data)),
+})
+const mapStateToProps = state => ({
+  user: state.user.user
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)((Login))
 
 const styles = StyleSheet.create({
   image: {
@@ -314,13 +335,5 @@ const styles = StyleSheet.create({
 
 })
 
-const mapDispatchToProps = dispatch => ({
-  setUser: (data) =>
-    dispatch(actions.user.setUser(data)),
-})
-const mapStateToProps = state => ({
-  user: state.user.user
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)((Login))
 
