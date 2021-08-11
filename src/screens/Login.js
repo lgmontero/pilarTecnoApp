@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, ImageBackground } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin,} from '@react-native-google-signin/google-signin';
+import { GoogleSignin, } from '@react-native-google-signin/google-signin';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
@@ -64,19 +64,24 @@ class Login extends React.Component {
     return (
 
       <LinearGradient colors={['#859398', '#D3CCE3', '#283048']} style={styles.body} >
+        
+        <Text style={styles.text} > Access To </Text>
 
-        <Text style={styles.text} > Access </Text>
         <View style={styles.base}>
+        <Image
+          style={styles.img}
+          source={require('../assets/images/img.png')}
+        ></Image>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("SignIn")}>
 
             <LinearGradient
-              colors={['#fc4a1a', '#fc4a1a','#F09819']}
+              colors={['#fc4a1a', '#fc4a1a', '#F09819']}
               style={styles.button}
               start={{ x: 0.1, y: 0.35 }}
               end={{ x: 0.5, y: 3.0 }}
               locations={[0.0, 0.8, 0.7]}
-              
+
             >
               <View>
                 <Image source={require('../assets/images/logon.png')} style={styles.image} />
@@ -104,12 +109,12 @@ class Login extends React.Component {
 
             } >
             <LinearGradient
-             style={styles.button}
-             start={{x: 0.1, y: 0.25}}
-             end={{x: 0.5, y: 3.0}}
-             locations={[0.0, 0.8, 0.7]}
-             colors={['#2193b0', '#0072ff', '#0052D4']}
-             
+              style={styles.button}
+              start={{ x: 0.1, y: 0.25 }}
+              end={{ x: 0.5, y: 3.0 }}
+              locations={[0.0, 0.8, 0.7]}
+              colors={['#2193b0', '#0072ff', '#0052D4']}
+
             >
               <View>
                 <Image source={require('../assets/images/google.png')} style={styles.image} />
@@ -121,7 +126,7 @@ class Login extends React.Component {
 
           </TouchableOpacity >
 
-          <TouchableOpacity 
+          <TouchableOpacity
 
             onPress={() => this.onFacebook().then(async (data) => {
               console.log('Signed in with Facebook!');
@@ -139,13 +144,13 @@ class Login extends React.Component {
             }
 
           >
-             <LinearGradient
+            <LinearGradient
               style={styles.button}
-              start={{x: 0.1, y: 0.35}}
-              end={{x: 0.5, y: 3.0}}
+              start={{ x: 0.1, y: 0.35 }}
+              end={{ x: 0.5, y: 3.0 }}
               locations={[0.0, 0.8, 0.6]}
               colors={['#4c669f', '#3b5998', '#192f6a']}
-                            
+
             >
               <View>
                 <Image source={require('../assets/images/facebook.png')} style={styles.image} />
@@ -156,7 +161,7 @@ class Login extends React.Component {
             </LinearGradient>
 
           </TouchableOpacity>
-        
+
         </View>
 
       </LinearGradient>
@@ -182,6 +187,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#2193b0',
     flexDirection: 'column',
   },
+  img: {
+    height: 250,
+    width: 202,
+    left: 56,
+    resizeMode: "contain",
+    marginTop: -205,
+    
+    position: 'absolute',
+
+  },
   image: {
     width: 40,
     height: 40,
@@ -191,7 +206,7 @@ const styles = StyleSheet.create({
 
   },
   text: {
-    fontSize: 38,
+    fontSize: 32,
     fontWeight: '300',
     color: 'black',
     textAlign: 'auto',
@@ -200,7 +215,7 @@ const styles = StyleSheet.create({
   },
   base: {
     marginVertical: 100,
-    paddingBottom: 200
+    paddingBottom: 170
   },
   button: {
     paddingLeft: 35,
@@ -211,7 +226,7 @@ const styles = StyleSheet.create({
     margin: 12,
     paddingBottom: 10,
     height: width / 7,
-    
+
   },
   textFi: {
     fontSize: 22,
@@ -220,9 +235,9 @@ const styles = StyleSheet.create({
     fontWeight: '100',          //'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' |
     margin: 8,
     color: '#ffffff',
-    textAlignVertical:'center',    // 'auto' | 'top' | 'bottom' | 'center' | 
+    textAlignVertical: 'center',    // 'auto' | 'top' | 'bottom' | 'center' | 
     backgroundColor: 'transparent'
 
   },
-  
+
 })

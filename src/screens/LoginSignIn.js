@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { Dimensions, Image, StyleSheet, Alert, Text, TouchableOpacity, View } from 'react-native';
+import {  Image, StyleSheet, Alert, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { firebase } from '@react-native-firebase/auth';
-import TextInput from '../utils/Text';
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import TextInput from '../utils/ImputValidator';
 import { connect } from 'react-redux';
 import { actions } from '../store';
 import { emailValidator } from '../utils/EmailValidator';
 import { passwordValidator } from '../utils/PassValidator';
 import { Button } from 'react-native-paper';
-// import Toast from '../utils/Error';
+
 
 const LoginSignIn = (props) => {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
   const [loading, setLoading] = useState()
-  // const [error, setError] = useState()
+  
   const signInFirebase = async ({ email, password }) => {
     try {
       const user = await firebase
@@ -25,15 +24,7 @@ const LoginSignIn = (props) => {
         
         props.setUser(data.user)
       })
-      // .then(async data => {
-      //   console.log('Signed in with e-mail!');
-      //   if (data) {
-      //       console.log('res login: ' + JSON.stringify(data.user));
-      //       try {
-      //           await AsyncStorage.setItem('isloged', JSON.stringify(data.user),);
-      //       } catch (e) { console.log('Error :' + e); }
-      //       props.setUser(data.user);
-      //   }})
+     
       return { user }
     } catch (error) {
       return {
@@ -112,7 +103,7 @@ const LoginSignIn = (props) => {
         </TouchableOpacity>
 
       </View>
-      {/* <Toast message={error} onDismiss={() => setError('')} /> */}
+      
     </LinearGradient>
 
 

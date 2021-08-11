@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { StyleSheet, Image, Text, Alert, TouchableOpacity, View } from 'react-native';
 import { firebase } from '@react-native-firebase/auth';
-import TextInput from '../utils/Text';
+import TextInput from '../utils/ImputValidator';
 import { nameValidator } from '../utils/NameValidator';
 import { emailValidator } from '../utils/EmailValidator';
 import { passwordValidator } from '../utils/PassValidator';
