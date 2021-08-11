@@ -1,29 +1,16 @@
-// import React, { Component } from 'react';
-import React, { Component, useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  Dimensions,
-  StatusBar,
-  StyleSheet,
-  Text,
-  ImageBackground,
-  TouchableOpacity,
-  View,
-  Alert,
-  TextInput
-} from 'react-native';
-import { Input, Icon, Button } from 'react-native-elements';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import React, { Component } from 'react';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import auth from '@react-native-firebase/auth';
+import { GoogleSignin,} from '@react-native-google-signin/google-signin';
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
 import { actions } from '../store';
-import { LoginButton, AccessToken,LoginManager } from 'react-native-fbsdk';
+
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
-
 
 
 class Login extends React.Component {
@@ -31,53 +18,16 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     
+
     }
     GoogleSignin.configure({
       webClientId: '334428375673-8v27scqf49ol6udlfh7cmh6aamddg6vp.apps.googleusercontent.com',
-      offlineAccess:true
+      offlineAccess: true
     });
-    
+
   }
 
-  onFirebaseLogin = async (email, password) => {
-    
-    try {
-      await auth().signInWithEmailAndPassword(email, password);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  register = async (email, password) => {
-    try {
-      await auth().createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        //Once the user creation has happened successfully, we can add the currentUser into firestore
-        //with the appropriate details.
-        firestore().collection('users').doc(auth().currentUser.uid)
-        .set({
-            fname: '',
-            lname: '',
-            email: email,
-            createdAt: firestore.Timestamp.fromDate(new Date()),
-            userImg: null,
-        })
-        //ensure we catch any errors at this stage to advise us if something does go wrong
-        .catch(error => {
-            console.log('Something went wrong with added user to firestore: ', error);
-        })
-      })
-      //we need to catch the whole sign up process if it fails too.
-      .catch(error => {
-          console.log('Something went wrong with sign up: ', error);
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  
-  onGoogleButtonPress = async () => {
+  onGoogle = async () => {
     // Get the users ID token
     const { idToken } = await GoogleSignin.signIn();
 
@@ -88,7 +38,7 @@ class Login extends React.Component {
     return auth().signInWithCredential(googleCredential);
 
   }
-  onFacebookButtonPress = async () => {
+  onFacebook = async () => {
     // Attempt login with permissions
     const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
 
@@ -111,141 +61,105 @@ class Login extends React.Component {
   }
 
   render() {
-
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
-
     return (
 
-      <SafeAreaView style={{ flex: 1 }}>
-        <ImageBackground
-          source={require('../assets/images/patron7.jpg')}
-          style={styles.image}
-        >
-          <View>
-            <ImageBackground
-              source={require('../assets/images/titulo7.png')}
-              style={styles.image2}
+      <LinearGradient colors={['#859398', '#D3CCE3', '#283048']} style={styles.body} >
+
+        <Text style={styles.text} > Access </Text>
+        <View style={styles.base}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("SignIn")}>
+
+            <LinearGradient
+              colors={['#fc4a1a', '#fc4a1a','#F09819']}
+              style={styles.button}
+              start={{ x: 0.1, y: 0.35 }}
+              end={{ x: 0.5, y: 3.0 }}
+              locations={[0.0, 0.8, 0.7]}
+              
             >
-              <Text style={styles.text}> Login </Text>
+              <View>
+                <Image source={require('../assets/images/logon.png')} style={styles.image} />
+                <Text style={styles.textFi}>
+                  Sign in Whith Firebase
+                </Text>
+              </View>
+            </LinearGradient>
 
-            </ImageBackground>
-          </View>
-          <View>
-            <View style={styles.base} >
-              <TextInput
-               style={styles.input}
-               Value={email}
-               onChangeText={(userEmail) => setEmail(userEmail)}
-               placeholderText="Email"
-               keyboardType="email-address"
-               autoCapitalize="none"
-               autoCorrect={false}
-                
-                leftIcon=
-                {
-                  <Icon
-                    name='user-alt'
-                    type="font-awesome-5"
-                    size={22}
-                    color='gray'
-
-                  />
-                }
-                placeholder='username'
-
-              />
-            </View>
-            <View style={styles.base}>
-              <Input style={styles.input}
-                placeholder=" Enter your password "
-                secureTextEntry={true}
-                leftIcon={<Icon
-                  name='lock'
-                  size={25}
-                  color='gray' />}
-              />
-            </View>
-          </View>
-
-          <TouchableOpacity style={[styles.buttonIn, { backgroundColor: 'rgba(27, 102, 135, 0.8)' }]}
-
-          >
-            <Text style={styles.textIn}>
-              Ingresar
-            </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonIn, { backgroundColor: 'rgba(27, 102, 135, 0.8)' }]}
 
-            onPress={() => this.onGoogleButtonPress().then(async (data) => {
+          <TouchableOpacity
+            onPress={() => this.onGoogle().then(async (data) => {
               console.log('Signed in with Google!');
               if (data) {
-                 try {
+                try {
                   await AsyncStorage.setItem('isloged', JSON.stringify(data.user));
-                 
+
                 } catch (e) {
                   console.log('Error de Logeo :' + e);
                 }
                 this.props.setUser(data.user);
-                
               }
             }).catch(err => { console.log(err) })
 
-            }
+            } >
+            <LinearGradient
+             style={styles.button}
+             start={{x: 0.1, y: 0.25}}
+             end={{x: 0.5, y: 3.0}}
+             locations={[0.0, 0.8, 0.7]}
+             colors={['#2193b0', '#0072ff', '#0052D4']}
+             
+            >
+              <View>
+                <Image source={require('../assets/images/google.png')} style={styles.image} />
+                <Text style={styles.textFi}>
+                  Sign in Whith Google
+                </Text>
+              </View>
+            </LinearGradient>
 
-          >
-            <Text style={styles.textIn}>
-              Google
-            </Text>
-          </TouchableOpacity>
+          </TouchableOpacity >
 
-          {/* <LoginButton style={[styles.buttonface, { backgroundColor: 'rgba(27, 102, 135, 0.8)' }]}
-          
-            onLoginFinished={
-              (error, result) => {
-                if (error) {
-                  console.log("login has error: " + result.error);
-                } else if (result.isCancelled) {
-                  console.log("login is cancelled.");
-                } else {
-                  AccessToken.getCurrentAccessToken().then(
-                    (data) => {
-                      console.log(data.accessToken.toString())
-                    }
-                  )
-                }
-              }
-            }
-            onLogoutFinished={() => console.log("logout.")}>
-            
-            </LoginButton> */}
-          <TouchableOpacity style={[styles.buttonIn, { backgroundColor: 'rgba(27, 102, 135, 0.8)' }]}
+          <TouchableOpacity 
 
-            onPress={() => this.onFacebookButtonPress().then(async (data) => {
+            onPress={() => this.onFacebook().then(async (data) => {
               console.log('Signed in with Facebook!');
               if (data) {
-                // console.log('res login: ' + JSON.stringify(data.user));
                 try {
                   await AsyncStorage.setItem('isloged', JSON.stringify(data.user));
                 } catch (e) {
                   console.log('Error de Logeo :' + e);
                 }
                 this.props.setUser(data.user);
-                
+
               }
             }).catch(err => { console.log(err) })
 
             }
 
           >
-            <Text style={styles.textIn}>
-              Facebook
-            </Text>
-          </TouchableOpacity>
+             <LinearGradient
+              style={styles.button}
+              start={{x: 0.1, y: 0.35}}
+              end={{x: 0.5, y: 3.0}}
+              locations={[0.0, 0.8, 0.6]}
+              colors={['#4c669f', '#3b5998', '#192f6a']}
+                            
+            >
+              <View>
+                <Image source={require('../assets/images/facebook.png')} style={styles.image} />
+                <Text style={styles.textFi}>
+                  Sign in Whith Facebook
+                </Text>
+              </View>
+            </LinearGradient>
 
-        </ImageBackground>
-      </SafeAreaView>
+          </TouchableOpacity>
+        
+        </View>
+
+      </LinearGradient>
 
     )
   }
@@ -261,79 +175,54 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, mapDispatchToProps)((Login))
 
 const styles = StyleSheet.create({
-  image: {
+  body: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center"
-  },
-  image2: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#2193b0',
     flexDirection: 'column',
-    width: width / 1.0,
-    height: width / 3,
-    marginTop: -200,
-
   },
-  base: {
-    backgroundColor: 'rgba(255,255,255, 0.95)',
-    shadowColor: 'white',
-    shadowOffset: { width: 9, height: 9 },
-    elevation: 18,
-    shadowOpacity: 0.2,
-    borderRadius: 5,
-    margin: width / 8,
-    height: width / 7,
-    marginVertical: width / 50,
+  image: {
+    width: 40,
+    height: 40,
+    left: -36,
+    margin: 2,
+    position: 'absolute',
+
   },
   text: {
-    marginTop: 45,
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-
-
+    fontSize: 38,
+    fontWeight: '300',
+    color: 'black',
+    textAlign: 'auto',
+    textShadowColor: 'white',
+    margin: 100
   },
-  textIn: {
-    margin: width / 50,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
+  base: {
+    marginVertical: 100,
+    paddingBottom: 200
   },
-  input: {
-    marginTop: 2.8,
-    fontSize: 15,
-    color: '#1c1c1c',
-    textAlign: 'center',
-    paddingBottom: 3,
-    backgroundColor: 'rgba(124, 150, 177, 0.5)',
-    borderRadius: 2,
-    height: width / 8,
-
-  },
-  buttonIn: {
-    marginLeft: 230,
-    marginRight: 50,
-    marginBottom: 90,
-    paddingBottom: 3,
+  button: {
+    paddingLeft: 35,
+    paddingRight: 18,
     borderRadius: 5,
     shadowColor: 'white',
     elevation: 10,
+    margin: 12,
+    paddingBottom: 10,
+    height: width / 7,
+    
+  },
+  textFi: {
+    fontSize: 22,
+    fontFamily: 'Roboto',
+    textAlign: 'right',             //'auto' | 'left' | 'right' | 'center' | 'justify' |
+    fontWeight: '100',          //'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' |
+    margin: 8,
+    color: '#ffffff',
+    textAlignVertical:'center',    // 'auto' | 'top' | 'bottom' | 'center' | 
+    backgroundColor: 'transparent'
 
   },
-  buttonface: {
-    marginLeft: 130,
-    marginRight: 50,
-    marginBottom: -50,
-    paddingBottom: 3,
-    borderRadius: 5,
-    shadowColor: 'white',
-    elevation: 10,
-    margin: width / 30,
-    height: width / 10,
-  },
-
+  
 })
-
-
-
