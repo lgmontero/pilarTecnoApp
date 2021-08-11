@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   Dimensions,
-  StatusBar,
   StyleSheet,
   Text,
-  ImageBackground,
-  TouchableOpacity,
   View,
-  Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Avatar, Button } from 'react-native-elements';
 import { actions } from '../store';
 import auth  from '@react-native-firebase/auth';
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
-// import { Profile } from "react-native-fbsdk-next";
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
@@ -94,14 +88,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     fontWeight: 'bold',
-    // color:'#fff',
     textAlign: 'center'
   },
   content: {
     flex: 1,
     top: 50,
     justifyContent: 'center',
-    // alignItems:'center'
   },
   dataContainer: {
     top: 10,

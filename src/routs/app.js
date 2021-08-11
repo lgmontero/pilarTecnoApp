@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Tabs } from './Tabs';
 import LoginAccess from './LoginStack';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Stack = createStackNavigator();
 

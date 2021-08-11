@@ -1,23 +1,10 @@
-import React, { Component, useState, useEffect, navigationRef } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  Dimensions,
-  StatusBar,
-  StyleSheet,
-  Text,
-  ImageBackground,
-  useColorScheme,
-  View
-} from 'react-native';
+import React, { useState, useEffect, navigationRef } from 'react';
+import { Dimensions, StyleSheet } from 'react-native';
 import AppStack from '../routs/app';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider, useDispatch } from 'react-redux';
 import { store, actions } from '../store';
 import auth  from '@react-native-firebase/auth';
-// import AppStack from '../routs/app';
-
-
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
