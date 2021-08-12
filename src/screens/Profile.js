@@ -11,7 +11,6 @@ import { Avatar, Button } from 'react-native-elements';
 import { actions } from '../store';
 import auth  from '@react-native-firebase/auth';
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
-
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 
@@ -36,7 +35,7 @@ class Profile extends React.Component {
       name: user.providerData[0].displayName
     })
   }
-
+  
 
   render() {
     const { email, photoURL, name } = this.state
@@ -46,7 +45,7 @@ class Profile extends React.Component {
           <View style={{ alignItems: 'center' }}>
             <Avatar
               rounded
-              source={{ uri: photoURL }}
+              source={{ uri:photoURL  }}
               size='xlarge'
             />
             <View style={styles.dataContainer}>

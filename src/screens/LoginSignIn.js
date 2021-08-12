@@ -3,6 +3,7 @@ import {  Image, StyleSheet, Alert, Text, TouchableOpacity, View } from 'react-n
 import LinearGradient from 'react-native-linear-gradient';
 import { firebase } from '@react-native-firebase/auth';
 import TextInput from '../utils/ImputValidator';
+import Auth from '../utils/firevalidator'
 import { connect } from 'react-redux';
 import { actions } from '../store';
 import { emailValidator } from '../utils/EmailValidator';
@@ -14,7 +15,8 @@ const LoginSignIn = (props) => {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
   const [loading, setLoading] = useState()
-  
+  const [error, setError] = useState()
+
   const signInFirebase = async ({ email, password }) => {
     try {
       const user = await firebase
@@ -28,7 +30,7 @@ const LoginSignIn = (props) => {
       return { user }
     } catch (error) {
       return {
-        error: Alert.alert((error.message)),
+        error: error.message,
         
       }
       
@@ -48,7 +50,9 @@ const LoginSignIn = (props) => {
       email: email.value,
       password: password.value,
     })
-    
+    if (response.error) {
+      setError(response.error)
+    }
     setLoading(false)
   }
 
@@ -103,7 +107,7 @@ const LoginSignIn = (props) => {
         </TouchableOpacity>
 
       </View>
-      
+      <Auth message={error} onDismiss={() => setError('')} />
     </LinearGradient>
 
 
