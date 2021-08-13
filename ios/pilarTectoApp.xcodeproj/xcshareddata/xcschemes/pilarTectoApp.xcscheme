@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "pilarTectoApp.app"
-               BlueprintName = "pilarTectoApp"
-               ReferencedContainer = "container:pilarTectoApp.xcodeproj">
+               BuildableName = "pilartecnoapp.app"
+               BlueprintName = "pilartecnoapp"
+               ReferencedContainer = "container:pilartecnoapp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "pilarTectoAppTests.xctest"
-               BlueprintName = "pilarTectoAppTests"
-               ReferencedContainer = "container:pilarTectoApp.xcodeproj">
+               BuildableName = "pilartecnoappTests.xctest"
+               BlueprintName = "pilartecnoappTests"
+               ReferencedContainer = "container:pilartecnoapp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "pilarTectoApp.app"
-            BlueprintName = "pilarTectoApp"
-            ReferencedContainer = "container:pilarTectoApp.xcodeproj">
+            BuildableName = "pilartecnoapp.app"
+            BlueprintName = "pilartecnoapp"
+            ReferencedContainer = "container:pilartecnoapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "pilarTectoApp.app"
-            BlueprintName = "pilarTectoApp"
-            ReferencedContainer = "container:pilarTectoApp.xcodeproj">
+            BuildableName = "pilartecnoapp.app"
+            BlueprintName = "pilartecnoapp"
+            ReferencedContainer = "container:pilartecnoapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

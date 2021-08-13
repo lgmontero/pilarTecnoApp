@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Tabs } from './Tabs';
-import Login from '../screens/Login';
+import LoginAccess from './LoginStack';
+import { useSelector } from 'react-redux';
 
 const Stack = createStackNavigator();
 
 export default AppStack = (props) => {
 
-    let isloged = true
-
+    const user = useSelector(state => state.user.user)
+    let isLoadingApp = false
     return (
         <Stack.Navigator headerMode="none" >
             {
-            isloged ? 
-            (<Stack.Screen name="AppStack" component={Tabs} />) 
-            :
-             (<Stack.Screen name="LogIn" component={Login}/>)
+                isLoadingApp?(
+                    <Stack.Screen name="LoadScreen" component={LoadScreen} />
+                ):
+                 user? (
+                    <Stack.Screen name="AppStack" component={Tabs} />
+                ) : (
+                    <Stack.Screen name="LogInAccess" component={LoginAccess} />
+                )
             }
-            
-            
         </Stack.Navigator >
-    )
-}
+    );
+};

@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface pilarTectoAppTests : XCTestCase
+@interface pilartecnoappTests : XCTestCase
 
 @end
 
-@implementation pilarTectoAppTests
+@implementation pilartecnoappTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {
